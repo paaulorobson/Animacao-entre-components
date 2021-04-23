@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul>
+      <li @click="componenteAtivo = 'About'">Sobre</li>
+      <li @click="componenteAtivo = 'Services'">Serviços</li>
+    </ul>
+    <transition mode="out-in">
+      <component :is="componenteAtivo"></component>
+    </transition>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import About from './pages/About'
+import Services from './pages/Services'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    About,
+    Services
+  },
+  data() {
+    return {
+      componenteAtivo: 'About'
+    }
   }
+  
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+.v-enter-active, .v-leave-active {
+  transition: all .3s;
+
 }
+
+.v-enter, .v-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -20px, 0);
+}
+
+
 </style>
